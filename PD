@@ -2,136 +2,113 @@ local G2L = {}
 
 -- StarterGui.ScreenGui
 G2L["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"))
-G2L["1"].ZIndexBehavior = Enum.ZIndexBehavior.Global
-G2L["1"].DisplayOrder = 9999999
+G2L["1"].ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
--- Main Frame
+-- Основной Frame
 G2L["2"] = Instance.new("Frame", G2L["1"])
 G2L["2"].BorderSizePixel = 0
-G2L["2"].BackgroundColor3 = Color3.fromRGB(72, 5, 63)
-G2L["2"].Size = UDim2.new(0, 540, 0, 320)
-G2L["2"].Position = UDim2.new(0.5, 0, 0.5, 0)
-G2L["2"].AnchorPoint = Vector2.new(0.5, 0.5)
+G2L["2"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+G2L["2"].Size = UDim2.new(0, 400, 0, 250)
+G2L["2"].Position = UDim2.new(0.33891, 0, 0.35185, 0)
 G2L["2"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-G2L["2"].ZIndex = 9999999
+G2L["2"].BackgroundTransparency = 0.7
+Instance.new("UICorner", G2L["2"]).CornerRadius = UDim.new(0, 6)
 
--- Key Input
-G2L["3"] = Instance.new("TextBox", G2L["2"])
-G2L["3"].BorderSizePixel = 0
-G2L["3"].TextSize = 20
-G2L["3"].BackgroundColor3 = Color3.fromRGB(255, 145, 245)
-G2L["3"].FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
-G2L["3"].TextColor3 = Color3.fromRGB(0, 0, 0)
-G2L["3"].Size = UDim2.new(0, 292, 0, 50)
-G2L["3"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-G2L["3"].Text = ""
-G2L["3"].PlaceholderText = "Enter your key here"
-G2L["3"].Position = UDim2.new(0.45926, 0, 0.79375, 0)
-G2L["3"].ZIndex = 9999999
-
--- Info Text
-G2L["4"] = Instance.new("TextLabel", G2L["2"])
-G2L["4"].TextWrapped = true
-G2L["4"].LineHeight = 1.44
+-- Фоновое изображение
+G2L["4"] = Instance.new("ImageLabel", G2L["2"])
 G2L["4"].BorderSizePixel = 0
-G2L["4"].TextSize = 13
-G2L["4"].TextScaled = true
-G2L["4"].BackgroundColor3 = Color3.fromRGB(255, 145, 245)
-G2L["4"].FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
-G2L["4"].TextColor3 = Color3.fromRGB(0, 0, 0)
-G2L["4"].Size = UDim2.new(0, 200, 0, 320)
+G2L["4"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+G2L["4"].Image = "rbxassetid://136582809341610"
+G2L["4"].Size = UDim2.new(0, 400, 0, 250)
 G2L["4"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-G2L["4"].Text = [[Welcome to PahTeT Hub, Hey ]] .. game.Players.LocalPlayer.Name .. [[, glad to see you here!
+G2L["4"].Position = UDim2.new(-0.00161, 0, -0.001, 0)
+Instance.new("UICorner", G2L["4"]).CornerRadius = UDim.new(0, 6)
 
-This is your one-stop place for exclusive tools, scripts, and chaos-powered creativity. Before you dive in, you'll need a key to unlock full access.
-
-🔑 How to get your key: Join our Discord server and follow the instructions in the #get-key channel: 👉 discord.gg/ttQMyKvKt6
-
-Once you’ve got your key, paste it below and smash that “Activate” button. If the key is valid, you’ll be instantly teleported into the full experience.
-
-⚠️ No key? No fun. We don’t do free rides — but we do deliver premium madness once you're in.]]
-G2L["4"].ZIndex = 9999999
-
--- Copy link key
-G2L["5"] = Instance.new("TextButton", G2L["2"])
-G2L["5"].TextWrapped = true
-G2L["5"].BorderSizePixel = 0
-G2L["5"].TextSize = 57
-G2L["5"].TextScaled = true
-G2L["5"].TextColor3 = Color3.fromRGB(0, 0, 0)
-G2L["5"].BackgroundColor3 = Color3.fromRGB(255, 145, 245)
-G2L["5"].FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
-G2L["5"].Size = UDim2.new(0, 292, 0, 23)
-G2L["5"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-G2L["5"].Text = "Copy link key"
-G2L["5"].Position = UDim2.new(0.45926, 0, 0, 0)
-G2L["5"].ZIndex = 9999999
-
--- LoadKey button
-G2L["6"] = Instance.new("TextButton", G2L["2"])
+-- Поле ввода ключа
+G2L["6"] = Instance.new("TextBox", G2L["4"])
+G2L["6"].TextWrapped = true
 G2L["6"].BorderSizePixel = 0
-G2L["6"].TextSize = 14
-G2L["6"].TextColor3 = Color3.fromRGB(0, 0, 0)
-G2L["6"].BackgroundColor3 = Color3.fromRGB(255, 145, 245)
-G2L["6"].FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
-G2L["6"].Size = UDim2.new(0, 141, 0, 30)
+G2L["6"].TextSize = 17
+G2L["6"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+G2L["6"].FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json")
+G2L["6"].TextColor3 = Color3.fromRGB(255, 255, 255)
+G2L["6"].BackgroundTransparency = 0.25
+G2L["6"].Size = UDim2.new(0, 225, 0, 30)
 G2L["6"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-G2L["6"].Text = "LoadKey"
-G2L["6"].Position = UDim2.new(0.73889, 0, 0.67188, 0)
-G2L["6"].ZIndex = 9999999
+G2L["6"].PlaceholderText = "Enter key..."
+G2L["6"].Text = ""
+G2L["6"].Position = UDim2.new(0.39778, 0, 0.84, 0)
+Instance.new("UICorner", G2L["6"]).CornerRadius = UDim.new(0, 6)
 
--- Top bar
-G2L["7"] = Instance.new("Frame", G2L["2"])
-G2L["7"].BorderSizePixel = 0
-G2L["7"].BackgroundColor3 = Color3.fromRGB(96, 96, 96)
-G2L["7"].Size = UDim2.new(0, 540, 0, 25)
-G2L["7"].Position = UDim2.new(0, 0, -0.07813, 0)
-G2L["7"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-G2L["7"].ZIndex = 9999999
-
--- Close button
-G2L["8"] = Instance.new("TextButton", G2L["7"])
+-- Кнопка копирования ссылки
+G2L["8"] = Instance.new("TextButton", G2L["4"])
+G2L["8"].TextWrapped = true
 G2L["8"].BorderSizePixel = 0
-G2L["8"].TextSize = 14
-G2L["8"].TextColor3 = Color3.fromRGB(0, 0, 0)
-G2L["8"].BackgroundColor3 = Color3.fromRGB(255, 0, 5)
-G2L["8"].FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
-G2L["8"].Size = UDim2.new(0, 40, 0, 25)
+G2L["8"].TextSize = 13
+G2L["8"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+G2L["8"].FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json")
+G2L["8"].TextColor3 = Color3.fromRGB(255, 255, 255)
+G2L["8"].BackgroundTransparency = 0.25
+G2L["8"].Size = UDim2.new(0, 110, 0, 25)
 G2L["8"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-G2L["8"].Text = "X"
-G2L["8"].Position = UDim2.new(0.92593, 0, 0, 0)
-G2L["8"].ZIndex = 9999999
+G2L["8"].Text = "Copy key link"
+G2L["8"].Position = UDim2.new(0.68333, 0, 0.04, 0)
+Instance.new("UICorner", G2L["8"]).CornerRadius = UDim.new(0, 6)
 
--- Valid keys
-local validKeys = {
-    ["G1T7XQ4Mkey9A2Z8K5R0N6"] = true,
-    ["fgftop1"] = true,
-}
+-- Кнопка загрузки ключа
+G2L["a"] = Instance.new("TextButton", G2L["4"])
+G2L["a"].TextWrapped = true
+G2L["a"].BorderSizePixel = 0
+G2L["a"].TextSize = 13
+G2L["a"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+G2L["a"].FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json")
+G2L["a"].TextColor3 = Color3.fromRGB(255, 255, 255)
+G2L["a"].BackgroundTransparency = 0.25
+G2L["a"].Size = UDim2.new(0, 110, 0, 25)
+G2L["a"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+G2L["a"].Text = "Load key"
+G2L["a"].Position = UDim2.new(0.68333, 0, 0.716, 0)
+Instance.new("UICorner", G2L["a"]).CornerRadius = UDim.new(0, 6)
 
--- Copy Discord link
-G2L["5"].MouseButton1Click:Connect(function()
+-- Задний фон
+G2L["c"] = Instance.new("Frame", G2L["2"])
+G2L["c"].ZIndex = 0
+G2L["c"].BorderSizePixel = 0
+G2L["c"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+G2L["c"].Size = UDim2.new(0, 420, 0, 266)
+G2L["c"].Position = UDim2.new(-0.02778, 0, -0.033, 0)
+G2L["c"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+G2L["c"].BackgroundTransparency = 0.55
+Instance.new("UICorner", G2L["c"]).CornerRadius = UDim.new(0, 6)
+
+-- 📋 Копирование Discord-ссылки
+G2L["8"].MouseButton1Click:Connect(function()
     setclipboard("https://discord.gg/ttQMyKvKt6")
-    G2L["5"].Text = "Copied!"
-    task.delay(1.5, function()
-        G2L["5"].Text = "Copy link key"
-    end)
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Copied",
+        Text = "Discord link copied to clipboard.",
+        Duration = 4,
+    })
 end)
 
--- Load key and launch loader
-G2L["6"].MouseButton1Click:Connect(function()
-    local input = G2L["3"].Text
-    if validKeys[input] then
-        G2L["6"].Text = "Access Granted!"
-        getgenv().Key = "Lirp**@!(#%*(Fixed*(!@%*(%!@*(%!*@(Yey*!@%@!OOOW59@(!%!@%%!@"
-        task.wait(1)
+-- ✅ Проверка ключа и запуск загрузчика
+G2L["a"].MouseButton1Click:Connect(function()
+    if G2L["6"].Text == "G1T7XQ4Mkey9A2Z8K5R0N6" then
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Access Granted",
+            Text = "Key is valid.",
+            Duration = 5,
+        })
         G2L["1"]:Destroy()
+        getgenv().Key = "Lirp**@!(#%*(Fixed*(!@%*(%!@*(%!*@(Yey*!@%@!OOOW59@(!%!@%%!@"
         loadstring(game:HttpGet("https://raw.githubusercontent.com/LirpOfficial/Lirp/refs/heads/main/Loader", true))()
     else
-        G2L["6"].Text = "Invalid Key"
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Access Denied",
+            Text = "Invalid key.",
+            Duration = 5,
+        })
     end
-    task.delay(2, function()
-        if G2L["1"] and G2L["6"] then
-            G2L["6"].Text = "LoadKey"
-        end
-    end)
 end)
+
+return G2L["1"], require;

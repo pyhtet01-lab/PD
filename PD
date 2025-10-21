@@ -105,9 +105,8 @@ G2L["a"].MouseButton1Click:Connect(function()
             Duration = 5,
         })
         G2L["1"]:Destroy()
-        getgenv().Key = "Lirp**@!(#%*(Fixed*(!@%*(%!@*(%!*@(Yey*!@%@!OOOW59@(!%!@%%!@"
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/LirpOfficial/Lirp/refs/heads/main/Loader", true))()
-    else
+        getgenv().Key = "VibGADSJfpo@!&%lator@*!%*!%#*@TU()*#T200@%*!%*#((#*%*(0@&U%*!*(@%U*U*"
+loadstring(game:HttpGet("https://raw.githubusercontent.com/LirpOfficial/Lirp/refs/heads/main/Loader", true))()
         game.StarterGui:SetCore("SendNotification", {
             Title = "Access Denied",
             Text = "Invalid key.",

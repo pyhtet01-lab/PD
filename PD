@@ -6,6 +6,7 @@ G2L["1"].ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 -- Основной Frame
 G2L["2"] = Instance.new("Frame", G2L["1"])
+G2L["2"].ZIndex = 99999
 G2L["2"].BorderSizePixel = 0
 G2L["2"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 G2L["2"].Size = UDim2.new(0, 400, 0, 250)
@@ -16,6 +17,7 @@ Instance.new("UICorner", G2L["2"]).CornerRadius = UDim.new(0, 6)
 
 -- Фоновое изображение
 G2L["4"] = Instance.new("ImageLabel", G2L["2"])
+G2L["4"].ZIndex = 99999
 G2L["4"].BorderSizePixel = 0
 G2L["4"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 G2L["4"].Image = "rbxassetid://136582809341610"
@@ -26,6 +28,7 @@ Instance.new("UICorner", G2L["4"]).CornerRadius = UDim.new(0, 6)
 
 -- Поле ввода ключа
 G2L["6"] = Instance.new("TextBox", G2L["4"])
+G2L["6"].ZIndex = 99999
 G2L["6"].TextWrapped = true
 G2L["6"].BorderSizePixel = 0
 G2L["6"].TextSize = 17
@@ -42,6 +45,7 @@ Instance.new("UICorner", G2L["6"]).CornerRadius = UDim.new(0, 6)
 
 -- Кнопка копирования ссылки
 G2L["8"] = Instance.new("TextButton", G2L["4"])
+G2L["8"].ZIndex = 99999
 G2L["8"].TextWrapped = true
 G2L["8"].BorderSizePixel = 0
 G2L["8"].TextSize = 13
@@ -57,6 +61,7 @@ Instance.new("UICorner", G2L["8"]).CornerRadius = UDim.new(0, 6)
 
 -- Кнопка загрузки ключа
 G2L["a"] = Instance.new("TextButton", G2L["4"])
+G2L["a"].ZIndex = 99999
 G2L["a"].TextWrapped = true
 G2L["a"].BorderSizePixel = 0
 G2L["a"].TextSize = 13
@@ -72,7 +77,7 @@ Instance.new("UICorner", G2L["a"]).CornerRadius = UDim.new(0, 6)
 
 -- Задний фон
 G2L["c"] = Instance.new("Frame", G2L["2"])
-G2L["c"].ZIndex = 0
+G2L["c"].ZIndex = 99999
 G2L["c"].BorderSizePixel = 0
 G2L["c"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 G2L["c"].Size = UDim2.new(0, 420, 0, 266)
@@ -112,3 +117,4 @@ G2L["a"].MouseButton1Click:Connect(function()
 end)
 
 return G2L["1"], require;
+

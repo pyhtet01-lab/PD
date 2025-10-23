@@ -1,0 +1,207 @@
+local Players = game:GetService("Players")
+local Player = Players.LocalPlayer
+local Mouse = Player:GetMouse()
+local Camera = workspace.CurrentCamera
+local CoreGui = game:GetService("CoreGui")
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+
+-- Очистка старого GUI
+for _,v in pairs(CoreGui:GetChildren()) do
+    if v.Name == "Revenant" then
+        v:Destroy()
+    end
+end
+
+-- Переменные
+local AimbotEnabled = false
+local AimbotActive = false
+local AimbotRadius = 50
+local AimbotKey = Enum.KeyCode.Q
+
+-- GUI
+local gui = Instance.new("ScreenGui", CoreGui)
+gui.Name = "Revenant"
+gui.ResetOnSpawn = false
+
+local screenSize = Camera.ViewportSize
+local sectionWidth = 225
+local sectionHeight = 180
+local section = Instance.new("Frame", gui)
+section.Size = UDim2.fromOffset(sectionWidth, sectionHeight)
+section.Position = UDim2.fromOffset((screenSize.X - sectionWidth) / 2, screenSize.Y * 0.1)
+section.BackgroundColor3 = Color3.fromRGB(29, 29, 29)
+
+local corner = Instance.new("UICorner", section)
+corner.CornerRadius = UDim.new(0, 8)
+
+-- Заголовок
+local title = Instance.new("TextLabel", section)
+title.Size = UDim2.fromOffset(sectionWidth, 38)
+title.Position = UDim2.fromOffset(0, 0)
+title.BackgroundTransparency = 1
+title.Text = "Combat"
+title.Font = Enum.Font.GothamBold
+title.TextSize = 13
+title.TextColor3 = Color3.fromRGB(214, 214, 214)
+title.TextXAlignment = Enum.TextXAlignment.Center
+
+-- Контейнер
+local container = Instance.new("Frame", section)
+container.Size = UDim2.fromOffset(sectionWidth, sectionHeight - 38)
+container.Position = UDim2.fromOffset(0, 38)
+container.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
+local containerCorner = Instance.new("UICorner", container)
+containerCorner.CornerRadius = UDim.new(0, 8)
+
+-- Toggle
+local toggleLabel = Instance.new("TextLabel", container)
+toggleLabel.Size = UDim2.fromOffset(sectionWidth, 18)
+toggleLabel.Position = UDim2.fromOffset(0, 6)
+toggleLabel.BackgroundTransparency = 1
+toggleLabel.Text = "Aimbot Enabled"
+toggleLabel.Font = Enum.Font.GothamBold
+toggleLabel.TextSize = 13
+toggleLabel.TextColor3 = Color3.fromRGB(214, 214, 214)
+toggleLabel.TextXAlignment = Enum.TextXAlignment.Center
+
+local toggleFrame = Instance.new("Frame", container)
+toggleFrame.Size = UDim2.fromOffset(38, 17)
+toggleFrame.Position = UDim2.fromOffset(180, 6)
+toggleFrame.BackgroundColor3 = Color3.fromRGB(62, 62, 62)
+local toggleCorner = Instance.new("UICorner", toggleFrame)
+toggleCorner.CornerRadius = UDim.new(1, 0)
+
+local knob = Instance.new("Frame", toggleFrame)
+knob.Size = UDim2.fromOffset(13, 13)
+knob.Position = UDim2.fromOffset(3, 2)
+knob.BackgroundColor3 = Color3.fromRGB(214, 214, 214)
+local knobCorner = Instance.new("UICorner", knob)
+knobCorner.CornerRadius = UDim.new(1, 0)
+
+local function updateToggle(state)
+    AimbotEnabled = state
+    AimbotActive = false
+    knob:TweenPosition(state and UDim2.fromOffset(22, 2) or UDim2.fromOffset(3, 2), "Out", "Quad", 0.2, true)
+    toggleFrame.BackgroundColor3 = state and Color3.fromRGB(56, 207, 154) or Color3.fromRGB(62, 62, 62)
+end
+
+toggleFrame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        updateToggle(not AimbotEnabled)
+    end
+end)
+
+-- Slider
+local sliderLabel = Instance.new("TextLabel", container)
+sliderLabel.Size = UDim2.fromOffset(sectionWidth, 18)
+sliderLabel.Position = UDim2.fromOffset(0, 30)
+sliderLabel.BackgroundTransparency = 1
+sliderLabel.Text = "Radius: 50"
+sliderLabel.Font = Enum.Font.GothamBold
+sliderLabel.TextSize = 13
+sliderLabel.TextColor3 = Color3.fromRGB(214, 214, 214)
+sliderLabel.TextXAlignment = Enum.TextXAlignment.Center
+
+local bar = Instance.new("Frame", container)
+bar.Size = UDim2.fromOffset(200, 6)
+bar.Position = UDim2.fromOffset(12, 54)
+bar.BackgroundColor3 = Color3.fromRGB(62, 62, 62)
+
+local fill = Instance.new("Frame", bar)
+fill.Size = UDim2.fromOffset(100, 6)
+fill.BackgroundColor3 = Color3.fromRGB(56, 207, 154)
+
+local knobSlider = Instance.new("Frame", bar)
+knobSlider.Size = UDim2.fromOffset(10, 10)
+knobSlider.Position = UDim2.fromOffset(95, -2)
+knobSlider.BackgroundColor3 = Color3.fromRGB(214, 214, 214)
+local knobCornerSlider = Instance.new("UICorner", knobSlider)
+knobCornerSlider.CornerRadius = UDim.new(1, 0)
+
+local dragging = false
+knobSlider.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+    end
+end)
+UserInputService.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = false
+    end
+end)
+UserInputService.InputChanged:Connect(function(input)
+    if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+        local mouseX = Mouse.X
+        local relativeX = math.clamp(mouseX - bar.AbsolutePosition.X, 0, 200)
+        local value = math.floor((relativeX / 200) * 100)
+        fill.Size = UDim2.fromOffset(relativeX, 6)
+        knobSlider.Position = UDim2.fromOffset(relativeX - 5, -2)
+        sliderLabel.Text = "Radius: " .. tostring(value)
+        AimbotRadius = value
+    end
+end)
+
+-- Бинд
+local bindLabel = Instance.new("TextButton", container)
+bindLabel.Size = UDim2.fromOffset(sectionWidth, 18)
+bindLabel.Position = UDim2.fromOffset(0, 78)
+bindLabel.BackgroundTransparency = 1
+bindLabel.Text = "Bind: Q"
+bindLabel.Font = Enum.Font.GothamBold
+bindLabel.TextSize = 13
+bindLabel.TextColor3 = Color3.fromRGB(214, 214, 214)
+bindLabel.TextXAlignment = Enum.TextXAlignment.Center
+
+bindLabel.MouseButton1Click:Connect(function()
+    bindLabel.Text = "Press any key..."
+    local conn
+    conn = UserInputService.InputBegan:Connect(function(input)
+        if input.KeyCode ~= Enum.KeyCode.Unknown then
+            AimbotKey = input.KeyCode
+            bindLabel.Text = "Bind: " .. tostring(AimbotKey):gsub("Enum.KeyCode.", "")
+            conn:Disconnect()
+        end
+    end)
+end)
+
+-- Аимбот логика
+local function getClosestBody()
+    local closest = nil
+    local shortest = AimbotRadius
+
+    for _, target in pairs(Players:GetPlayers()) do
+        if target ~= Player and target.Character and target.Character:FindFirstChild("HumanoidRootPart") then
+            local part = target.Character.HumanoidRootPart
+            local screenPos, visible = Camera:WorldToViewportPoint(part.Position)
+            if visible then
+                local dist = (Vector2.new(screenPos.X, screenPos.Y) - Camera.ViewportSize / 2).Magnitude
+                if dist < shortest then
+                    shortest = dist
+                    closest = part
+                end
+            end
+        end
+    end
+
+    return closest
+end
+
+RunService.RenderStepped:Connect(function()
+    if AimbotEnabled and AimbotActive then
+        local target = getClosestBody()
+        if target then
+            local current = Camera.CFrame.Position
+            Camera.CFrame = CFrame.new(current, target.Position)
+        end
+    end
+end)
+
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    if gameProcessed then return end
+    if input.KeyCode == AimbotKey then
+        if AimbotEnabled then
+            AimbotActive = not AimbotActive
+        end
+    end
+end)

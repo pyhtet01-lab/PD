@@ -145,7 +145,7 @@ end)
 -- Бинд
 local bindLabel = Instance.new("TextButton", container)
 bindLabel.Size = UDim2.fromOffset(sectionWidth, 18)
-bindLabel.Position = UDim2.fromOffset(0, 78)
+bindLabel.Position = UDim2.fromOffset(0, 70)
 bindLabel.BackgroundTransparency = 1
 bindLabel.Text = "Bind: Q"
 bindLabel.Font = Enum.Font.GothamBold
